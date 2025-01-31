@@ -4,14 +4,12 @@ import HomePage from './pages/HomePage';
 import Motocarros from './pages/Motocarros';
 
 function App() {
-  // Iniciamos el estado leyendo de localStorage
   const [authorized, setAuthorized] = useState(() => {
     return localStorage.getItem('authorized') === 'true';
   });
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    // Solo pedimos usuario/contraseña si NO está autorizado
     if (!authorized) {
       const username = prompt('Ingresa tu usuario:');
       const password = prompt('Ingresa tu contraseña:');
@@ -24,21 +22,17 @@ function App() {
       }
     }
 
-    // Marcamos que ya hicimos la verificación.
     setChecked(true);
   }, [authorized]);
 
   if (!checked) {
-    // Mientras no terminemos la comprobación, podemos mostrar un loader o null
     return null;
   }
 
   if (!authorized) {
-    // Si, luego del prompt, no está autorizado, mostramos algo
     return <h2>Usuario o contraseña incorrectos.</h2>;
   }
 
-  // Si está autorizado, renderizamos normalmente
   return (
     <Router>
       <Routes>
