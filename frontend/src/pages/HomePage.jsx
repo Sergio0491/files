@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { API_BASE_URL } from '../config';
+import React, { useEffect, useState } from "react";
+import { API_BASE_URL } from "../config";
 
 function HomePage() {
   const [users, setUsers] = useState([]);
-  const [error, setError] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const fetchUsers = async () => {
     try {
@@ -16,7 +16,7 @@ function HomePage() {
         },
       });
       if (!response.ok) {
-        throw new Error('Error al obtener usuarios');
+        throw new Error("Error al obtener usuarios");
       }
       const data = await response.json();
       setUsers(data);
@@ -33,15 +33,15 @@ function HomePage() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error('Error al descargar PDF');
+          throw new Error("Error al descargar PDF");
         }
         return response.blob();
       })
       .then((blob) => {
         const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
+        const a = document.createElement("a");
         a.href = url;
-        a.download = 'usuario.pdf';
+        a.download = "usuario.pdf";
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -57,14 +57,14 @@ function HomePage() {
 
   // Verificar si hubo error
   if (error) {
-    return <div style={{ margin: '20px' }}>Error: {error}</div>;
+    return <div style={{ margin: "20px" }}>Error: {error}</div>;
   }
 
   // Filtrar usuarios según el término de búsqueda
   const filteredUsers = users.filter((user) => {
     // Desestructuramos los campos de user para que no sean undefined.
     // Así, si algo no existe, al menos será un string vacío.
-    const { name = '', last_name = '', id_number = '' } = user;
+    const { name = "", last_name = "", id_number = "" } = user;
 
     // Convertimos todo a string para evitar errores si id_number no es un string
     // y a minúsculas para coincidencias que no dependan de mayúsculas/minúsculas.
@@ -78,49 +78,49 @@ function HomePage() {
   });
 
   const containerStyle = {
-    margin: '20px',
-    padding: '20px',
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    boxShadow: '0 0 8px rgba(0, 0, 0, 0.1)',
-    maxWidth: '900px',
+    margin: "20px",
+    padding: "20px",
+    backgroundColor: "#fff",
+    borderRadius: "8px",
+    boxShadow: "0 0 8px rgba(0, 0, 0, 0.1)",
+    maxWidth: "900px",
   };
 
   const tableStyle = {
-    borderCollapse: 'collapse',
-    width: '100%',
-    marginBottom: '20px',
+    borderCollapse: "collapse",
+    width: "100%",
+    marginBottom: "20px",
   };
 
   const cellStyle = {
-    border: '1px solid #ddd',
-    padding: '8px',
+    border: "1px solid #ddd",
+    padding: "8px",
   };
 
   const headerCellStyle = {
     ...cellStyle,
-    backgroundColor: '#f2f2f2',
-    fontWeight: 'bold',
-    textAlign: 'left',
+    backgroundColor: "#f2f2f2",
+    fontWeight: "bold",
+    textAlign: "left",
   };
 
   const searchInputStyle = {
-    marginBottom: '10px',
-    padding: '8px',
-    width: '100%',
-    boxSizing: 'border-box',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
+    marginBottom: "10px",
+    padding: "8px",
+    width: "100%",
+    boxSizing: "border-box",
+    borderRadius: "4px",
+    border: "1px solid #ccc",
   };
 
   const buttonStyle = {
-    marginTop: '5px',
-    backgroundColor: '#007BFF',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    padding: '6px 12px',
-    cursor: 'pointer',
+    marginTop: "5px",
+    backgroundColor: "#007BFF",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    padding: "6px 12px",
+    cursor: "pointer",
   };
 
   return (
@@ -147,7 +147,7 @@ function HomePage() {
         <tbody>
           {filteredUsers.map((u, index) => {
             const rowStyle = {
-              backgroundColor: index % 2 === 0 ? '#f9f9f9' : '#ffffff',
+              backgroundColor: index % 2 === 0 ? "#f9f9f9" : "#ffffff",
             };
 
             return (
